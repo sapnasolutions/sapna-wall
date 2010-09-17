@@ -29,14 +29,19 @@ class WallPostsController < ActionController::Base
       if params[:wall_post_link].present? && params[:wall_post_link][:url] != "http://"
         @wall_post.wall_post_links.build(params[:wall_post_link])
         page["wall_link_form"].hide
-        wall_post.post = t("posted_a_link") if @wall_post.post.blank?
+        @wall_post.post = "Posted a link." if @wall_post.post.blank?
       end
       if params[:wall_post_video].present? && params[:wall_post_video][:url] != "http://"
         @wall_post.wall_post_videos.build(params[:wall_post_video]) 
         page.replace_html "VideoObject"," "
         page["video_form"].show
         page["video_upload_form"].hide
-        wall_post.post = t("posted_a_video") if @wall_post.post.blank?
+        @wall_post.post = "Posted a video." if @wall_post.post.blank?
+      end
+      @wall_post_photos = WallPostPhoto.find(:all, :conditions => ["user_id = ? AND wall_post_id is null AND created_at > ?", current_user.id, Time.now.utc - 15.minutes], :limit => 5)
+      @wall_post.wall_post_photos << @wall_post_photos
+      unless @wall_post_photos.blank?
+        @wall_post.post = "Posted images." if @wall_post.post.blank?
       end
       if @wall_post.save
         page.insert_html :top, "sapna_wall", :partial => "wall_posts/wall_post", :locals => {:wall_post => @wall_post}

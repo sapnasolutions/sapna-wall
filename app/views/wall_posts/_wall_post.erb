@@ -5,6 +5,7 @@
   <% end %>
   <% if wall_post.wall_post_photos.present? %>
     <div><%= render :partial => "wall_posts/wall_post_photo", :collection => wall_post.wall_post_photos %></div>
+    <div class="clear"></div>
   <% end %>
   <% if wall_post.wall_post_videos.present? %>
     <div><%= render :partial => "wall_posts/video", :collection => wall_post.wall_post_videos %></div>
