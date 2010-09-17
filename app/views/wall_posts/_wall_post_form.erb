@@ -1,93 +1,103 @@
-<div>
+<div class="sapna-wall-form">
   <%  form_remote_tag :url => wall_posts_path, :method => :post, :loading => "$('spinner_wall_post_main').show();", :complete => "$('spinner_wall_post_main').hide();", :html => {:id => "wall_post_form",:class=>"margin-bottom-10", :multipart => "true"} do %>
-    <div>
-      - if current_user && current_user.id != p_id && p_type == "User" && @wp_user
-        = text_field :wall_post, :post, :onfocus => "textbox_tooltip_onfocus(this, '#{t("leave_a_post_on_friends_wall", :friend => @wp_user.display_name)}');", :onblur => "textbox_tooltip_onblur(this, '#{t("leave_a_post_on_friends_wall", :friend => @wp_user.display_name)}');", :value => "#{t("leave_a_post_on_friends_wall", :friend => @wp_user.display_name)}", :class => "blur"
-      - else
-        = text_field :wall_post, :post, :onfocus => "textbox_tooltip_onfocus(this, '#{t(@wall_help_text)}');", :onblur => "textbox_tooltip_onblur(this, '#{t(@wall_help_text)}');", :value => "#{t(@wall_help_text)}"
-      = hidden_field :wall_post, :parent_type, :value => p_type
-      = hidden_field :wall_post, :parent_id, :value => p_id
-      = hidden_field_tag :wall_help_text, @wall_help_text
-      - if(lounge rescue false)
-        = hidden_field_tag :lounge, lounge
-    .clear
-    #optional_form_attributes
-      #video_upload_form.photo_upload_section.margin-bottom-10{ :style => "display:none" }
-        .photo_section_header
-          .left
-            = image_tag "video_syb1.png", :class => "left margin-right-5"
-            %p.left= t("video")
-          .right= link_to_function image_tag "msg_close_15x15.png" do |page| page.visual_effect(:appear, "video_form");page.visual_effect(:fade, "video_upload_form"); page.visual_effect(:appear, "post_option_buttons");page.replace_html("VideoObject"," "); end
-          .clear
-        #VideoObject
-        #video_form
-          = text_field :video, :url, :style => "width:424px !important;", :onfocus => "textbox_tooltip_onfocus(this, 'http://');", :onblur => "textbox_tooltip_onblur(this, 'http://');", :value => "http://"
-          .margin-top-10
-            .left= link_to_remote t("attach_video"), :url => { :controller => "wall_posts", :action => 'attach_video' }, :with => "'post_url='+escape($('video_url').value)",:loading=> "$('spinner_wall_post_video').style.display = 'block'",:complete => "$('spinner_wall_post_video').style.display = 'none';$('video_url').value = '';"
-            #spinner_wall_post_video.left.margin-left-10{ :style => "display:none;" }= image_tag('loading.gif', :height => "23px;")
-            .clear
-      #wall_photo_form.photo_upload_section.margin-bottom-10{ :style => "display:none;" }
-        .photo_section_header
-          .left
-            = image_tag "file_syb1.png", :class => "left margin-right-5"
-            %p.left= t("photos")
-          .right= link_to_remote(image_tag("msg_close_15x15.png"), {:url => wall_photo_path(1), :loading => "$('post_option_buttons').show(); $('divFileProgressContainer').innerHTML=''; $('thumbnails').innerHTML='';$('wall_photo_form').hide();", :method => :delete } )
-          .clear
-        %div
-          %div{:style=>"float:left; display: inline; border: solid 1px #cdcdcd; background: #deeaea; padding: 5px 0 8px 0; width:100px;"}
-            %span{:id=>"SWFUploadButton"}
-          %label.left.margin-left-10
-            %em
-              = t("you_can_select_up_to_5_files_at_a_time")
-              %br
-              = 3
-              = t("megabyte_upload_limit_per_file")
-          .clear
-        %script{:type=>'text/javascript'}
+    <div class="margin-bottom-10">
+      <%= text_field :wall_post, :post, :onfocus => "textbox_tooltip(this, 'Whats on your mind?');", :onblur => "textbox_tooltip(this, 'Whats on your mind?');", :value => "Whats on your mind?" %>
+      <%= hidden_field :wall_post, :parent_type, :value => p_type %>
+      <%= hidden_field :wall_post, :parent_id, :value => p_id %>
+    </div>
+    <div class="clear"></div>
+    <div id="optional_form_attributes">
+      <div id="video_upload_form" class="photo_upload_section margin-bottom-10" style="display:none;">
+        <div class="photo_section_header">
+          <div class="left">
+            <%= image_tag "video_syb1.png", :class => "left margin-right-5" %>
+            <p class="left">Video</p>
+          </div>
+          <div class="right">
+            <%= link_to_function image_tag("msg_close_15x15.png", :border => "0px") do |page| 
+              page.visual_effect(:appear, "video_form");
+              page.visual_effect(:fade, "video_upload_form"); 
+              page.visual_effect(:appear, "post_option_buttons"); 
+              page.replace_html("VideoObject"," "); 
+            end %>
+          </div>
+          <div class="clear"></div>
+        </div>
+        <div id="VideoObject"></div>
+        <div id="video_form">
+          <%= text_field :video, :url, :onfocus => "textbox_tooltip(this, 'http://');", :onblur => "textbox_tooltip(this, 'http://');", :value => "http://" %>
+          <div class="margin-top-10">
+            <div class="left"><%= link_to_remote "Attach Video", :url => { :controller => "wall_posts", :action => 'attach_video' }, :with => "'post_url='+escape($('video_url').value)",:loading=> "$('spinner_wall_post_video').style.display = 'block'",:complete => "$('spinner_wall_post_video').style.display = 'none';$('video_url').value = '';" %></div>
+            <div id="spinner_wall_post_video" class="left margin-left-10" style="display:none;"><%= image_tag('sapna-wall-spinner.gif', :height => "23px;") %></div>
+            <div class="clear"></div>
+          </div>
+        </div>
+      </div>
+      <div id="wall_photo_form" class="photo_upload_section margin-bottom-10" style="display:none;">
+        <div class="photo_section_header">
+          <div class="left">
+            <%= image_tag "file_syb1.png", :class => "left margin-right-5" %>
+            <p class="left"><%= "Photos" %></p>
+          </div>
+          <div class="right"><%= link_to_remote(image_tag("msg_close_15x15.png", :border => "0px"), {:url => wall_post_photo_path(1), 
+            :loading => "$('post_option_buttons').show(); $('divFileProgressContainer').innerHTML=''; $('thumbnails').innerHTML='';$('wall_photo_form').hide();", 
+            :method => :delete } ) %>
+          </div>
+          <div class="clear"></div>
+          <div style="float:left; display: inline; border: solid 1px #cdcdcd; background: #deeaea; padding: 5px 0 8px 0; width:100px;">
+            <span id="SWFUploadButton"></span>
+          </div>
+          <label class="left margin-left-10">
+            <em>
+              You can select 5 files at a time
+              <br/>
+              3 Mb limit per file
+            </em>
+          </label>
+          <div class="clear"></div>
+        </div>
+        <script type='text/javascript'>
           var uploader;
-          - session_key = ActionController::Base.session_options[:key]
-          ="uploader = new WallEngine.SwfUpload('#{wall_photos_path}?user_id=#{current_user.id}'); "
-        #divFileProgressContainer
-        #thumbnails
-        .clear
-      #wall_link_form.photo_upload_section.margin-bottom-10{ :style => "display:none" }
-        .photo_section_header
-          .left
-            = image_tag "link_syb1.png", :class => "left margin-right-5"
-            %p.left= t("link")
-          .right= link_to_function image_tag "msg_close_15x15.png" do |page| page.visual_effect(:fade, "wall_link_form"); page.visual_effect(:appear, "post_option_buttons"); page.visual_effect(:appear, "video_form")  end
-          .clear
-        = text_field :wall_post_link, :url, :style => "width:424px !important;", :onfocus => "textbox_tooltip_onfocus(this, 'http://');", :onblur => "textbox_tooltip_onblur(this, 'http://');", :value => "http://"
-        .clear
-    .clear
-    .left{:style=>"width:458px;"}
-      .margin-bottom-10
-        .left#post_option_buttons
-          %p.left.margin-right-10.margin-top-5
-            ="#{t("attach")}:"
-          = link_to_function("", :id => "photo_share_btn", :class => "photo_share left", :title => t("photos")) do |page| page.visual_effect(:appear, "wall_photo_form"); page.visual_effect(:fade, "post_option_buttons") end
-          = link_to_function("", :id => "video_share_btn", :class => "video_share left", :title => t("video")) do |page| page.visual_effect(:appear, "video_upload_form"); page.visual_effect(:fade, "post_option_buttons") end
-          = link_to_function("", :id => "link_share_btn", :class => "link_share left", :title => t("link"))  do |page| page.visual_effect(:appear, "wall_link_form"); page.visual_effect(:fade, "post_option_buttons") end
-        #spinner_wall_post_main.right.margin-left-10{ :style => "display:none;" }= image_tag('loading.gif', :height => "23px;")
-        - if p_type && (p_type.downcase == "user" || p_type.downcase == "zcc") && !@wp_user
-          .left.margin-left-10= label :wall_post, :private, t("everyone")
-          .left.margin-left-10= radio_button_tag "wall_post[private]", "false", true
-          .left.margin-left-10= label :wall_post, :private, t("only_friends")
-          .left.margin-left-10= radio_button_tag "wall_post[private]", "true", false
-        .right= submit_tag t("share"), :id => "share_submit", :onclick => "$('share_submit').hide();"
-    .clear
-%hr
-- if @wp_user
-  :javascript
-    jQuery("#wall_post_post").blur(function(){toggle_inner_text();});
-    jQuery("#wall_post_post").focus(function(){toggle_inner_text();});
-
-    function toggle_inner_text(){
-      if($("wall_post_post").value == "#{t("leave_a_post_on_friends_wall", :friend => @wp_user.display_name)}"){
-        $("wall_post_post").value = '';
-        $("wall_post_post").className='';
-      }else if($("wall_post_post").value == ""){
-        $("wall_post_post").value = "#{t("leave_a_post_on_friends_wall", :friend => @wp_user.display_name)}";
-        $("wall_post_post").className='blur';
-      }
-    }
+          <%- session_key = ActionController::Base.session_options[:key] %>
+          <%="uploader = new SapnaWall.SwfUpload('#{wall_post_photos_path}?user_id=#{current_user.id}');" %>
+        </script>
+        <div id="divFileProgressContainer"></div>
+        <div id="thumbnails"></div>
+        <div class="clear"></div>
+      </div>
+      <div id="wall_link_form" class="photo_upload_section margin-bottom-10" style="display:none">
+        <div class="photo_section_header">
+          <div class="left">
+            <%= image_tag "link_syb1.png", :class => "left margin-right-5" %>
+            <p class="left">Link</p>
+          </div>
+          <div class="right"><%= link_to_function image_tag("msg_close_15x15.png", :border => "0px;") do |page| page.visual_effect(:fade, "wall_link_form"); page.visual_effect(:appear, "post_option_buttons"); page.visual_effect(:appear, "video_form")  end %></div>
+          <div class="clear"></div>
+        </div>
+        <%= text_field :wall_post_link, :url, :onfocus => "textbox_tooltip(this, 'http://');", :onblur => "textbox_tooltip(this, 'http://');", :value => "http://" %>
+        <div class="clear"></div>
+      </div>
+    </div>
+    <div class="clear"></div>
+    <div class="button-panel">
+      <div class="margin-bottom-10">
+        <div class="left" id="post_option_buttons">
+          <p class="left margin-right-10">Attach:</p>
+          <%= link_to_function("", :id => "photo_share_btn", :class => "photo_share left", :title => "Photos") do |page| page.visual_effect(:appear, "wall_photo_form"); page.visual_effect(:fade, "post_option_buttons") end %>
+          <%= link_to_function("", :id => "video_share_btn", :class => "video_share left", :title => "Video") do |page| page.visual_effect(:appear, "video_upload_form"); page.visual_effect(:fade, "post_option_buttons") end %>
+          <%= link_to_function("", :id => "link_share_btn", :class => "link_share left", :title => "Link")  do |page| page.visual_effect(:appear, "wall_link_form"); page.visual_effect(:fade, "post_option_buttons") end %>
+        </div>
+        <div id="spinner_wall_post_main" class="right margin-left-10" style="display:none;"><%= image_tag('sapna-wall-spinner.gif', :height => "23px;") %></div>
+        <%- if p_type && (p_type.downcase == "user" || p_type.downcase == "zcc") && !@wp_user %>
+          <div class="left margin-left-10"><p>Everyone</p></div>
+          <div class="left margin-left-10"><%= radio_button_tag "wall_post[private]", "false", true %></div>
+          <div class="left margin-left-10"><p>Only Friends</p></div>
+          <div class="left margin-left-10"><%= radio_button_tag "wall_post[private]", "true", false %></div>
+        <% end %>
+      </div>
+      <div class="right"><%= submit_tag "Share", :id => "share_submit", :onclick => "$('share_submit').hide();" %></div>
+      <div class="clear"></div>
+    </div>
+  <% end %>
+</div>
+<hr/>

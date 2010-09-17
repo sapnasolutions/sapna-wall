@@ -1,0 +1,15 @@
+<div class="margin-top-10">
+  <% if !video.video_thumbnail.to_s.empty? %>
+    <div class="left" id="video_image_<%=video.id%>">
+      <%= link_to_remote(image_tag(video.video_thumbnail, :border => "0px") , :url => {:controller => "wall_posts", :action => 'play_video' , :code =>  video.video_embed_code,:id => "video_image_#{video.id}"}) %>
+    </div>
+    <div id="video_details" class="left">
+      <div><%= video.title %></div>
+      <hr/>
+      <div><%= video.url %></div>
+      <hr/>
+      <div><%= truncate(video.description,100) %></div>
+    </div>
+    <div class="clear"></div>
+  <% end %>
+</div>

@@ -1,0 +1,86 @@
+.left{
+  float: left;
+}
+
+.right{
+  float: right;
+}
+
+.clear{
+  clear: both;
+}
+
+.margin-bottom-10{
+  margin-bottom: 10px;
+}
+
+.sapna-wall-form{
+  width: 476px;
+  border:2px solid #CECECE
+  font-family: arial, Helvetica,sans-serif;
+  font-size:11px;
+}
+
+.sapna-wall-form input[type="text"]{
+  width: 476px;
+}
+
+.sapna-wall-form #video_url, .sapna-wall-form #wall_post_link_url{
+  width: 450px;
+}
+
+.sapna-wall-form p{
+  margin: 5px 0 0 0;
+}
+
+.sapna-wall-form #post_option_buttons{
+  margin-right: 10px;
+}
+
+#post_option_buttons a.photo_share{
+  width:31px;
+  height:24px;
+  display:block;
+  background:url(/images/file_syb.png) no-repeat;
+  text-indent:-9999px;
+}
+
+#post_option_buttons a.photo_share:hover{
+  background:url(/images/file_syb.png) 0 -24px no-repeat;
+}
+
+#post_option_buttons a.video_share{
+  width:31px;
+  height:24px;
+  display:block;
+  background:url(/images/video_syb.png) no-repeat;
+  text-indent:-9999px;
+}
+
+#post_option_buttons a.video_share:hover{
+  background:url(/images/video_syb.png) 0 -24px no-repeat;
+}
+
+#post_option_buttons a.link_share{
+  width:31px;
+  height:24px;
+  display:block;
+  background:url(/images/link_syb.png) no-repeat;
+  text-indent:-9999px;
+}
+
+#post_option_buttons a.link_share:hover{
+  background:url(/images/link_syb.png) 0 -24px no-repeat;
+}
+
+.photo_upload_section{
+  width:450px;
+  border:1px solid #CECECE;
+  padding:10px 12px;
+}
+
+.photo_section_header{
+  height:20px;
+  border-bottom:1px solid #cecece;
+  margin-bottom:10px;
+}

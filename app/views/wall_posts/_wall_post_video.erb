@@ -1,0 +1,22 @@
+<div>
+  <%= hidden_field_tag "wall_post_video[title]", wall_post_video[:title] %>
+  <%= hidden_field_tag "wall_post_video[url]", wall_post_video[:url] %>
+  <%= hidden_field_tag "wall_post_video[video_duration]", wall_post_video[:video_duration] %>
+  <%= hidden_field_tag "wall_post_video[description]", wall_post_video[:description] %>
+  <%= hidden_field_tag "wall_post_video[video_embed_code]", wall_post_video[:video_embed_code] %>
+  <%= hidden_field_tag "wall_post_video[video_thumbnail]", wall_post_video[:video_thumbnail] %>
+  <%= hidden_field_tag "wall_post_video[video_type]", wall_post_video[:video_type] %>
+</div>
+<div>
+  <%- if !wall_post_video[:video_thumbnail].to_s.empty? %>
+    <div id="video_image" class="left">
+      <%= link_to_remote(image_tag(wall_post_video[:video_thumbnail], :border => "0px") , :url => {:action => 'play_video' , :code => wall_post_video[:video_embed_code], :id=>"video_image"}) %>
+    </div>
+    <div id="video_details" class="left">
+      <div><%= wall_post_video[:video_title] %></div>
+      <div><%= wall_post_video[:url] %></div>
+      <div><%= truncate(wall_post_video[:description],100) %></div>
+    </div>
+    <div class="clear"></div>
+  <% end %>
+</div>

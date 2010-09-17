@@ -6,6 +6,6 @@ namespace :sapna_wall do
     system "gem install open-uri"
     system "gem install hpricot"
     system "gem install will_paginate --source http://gemcutter.org"
-    system "gem install haml"
+    system "script/plugin install http://svn.techno-weenie.net/projects/plugins/attachment_fu/"
   end
 end

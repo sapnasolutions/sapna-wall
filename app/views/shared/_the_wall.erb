@@ -1,12 +1,12 @@
-/= javascript_include_tag("ajax_pagination")
-/= javascript_include_tag "AC_RunActiveContent"
-/= javascript_include_tag "uploader"
-/= javascript_include_tag "swfupload"
+<%#= javascript_include_tag("ajax_pagination") %>
+<%#= javascript_include_tag "AC_RunActiveContent" %>
+<%#= javascript_include_tag "uploader" %>
+<%#= javascript_include_tag "swfupload" %>
 <script type="text/javascript">
   new Ajax.Request('/wall_posts',
   {
     method:'get',
-    parameters: "?p_type=#{p_type}&p_id=#{p_id}}",
+    parameters: "?p_type=<%= p_type %>&p_id=<%= p_id %>",
     onSuccess: function(transport){
       var response = transport.responseText;
       $('sapna_wall').innerHtml = response;

@@ -12,6 +12,12 @@ class WallPost < ActiveRecord::Base
   # named scopes
   named_scope :public_posts, :conditions => ["private = false"]
   
+  # call backs
+  before_validation do |wp|
+    logger.debug wp.inspect
+    wp.post = "" if wp.post == "Whats on your mind?"
+  end
+  
   # If activity tracking is required uncomment the following.
   # acts_as_activity :user
   

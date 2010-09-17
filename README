@@ -15,21 +15,28 @@ script/generate sapna_wall setup # something needs to be passed to the generator
 
 Install required plugins and gems
 
-rake sapna_wall:install_gems
+rake sapna_wall:install_gems_and_plugins
 
-Gems which get installed are:
+Gems/plugins which get installed are:
 1. youtube_g
 2. hpricot
 3. open-uri
 4. will_paginate
+5. attachment_fu script/plugin install http://svn.techno-weenie.net/projects/plugins/attachment_fu/
 
-
+Usage
+=====
+In the user (or wherever you want to put the wall) show page
+use the following helper in the show page.
+<%= put_the_wall_here("User", "1") %>
+here, "User" is the class name and "1" is the object id.
 
 Assumptions
 ===========
 
 1. This plugin requires acts_as_network, or assumes that your user model has_many friends and @user.friends returns an array of friends or blank. 
 2. Assumes that current_user method returns the logged-in user object or false
+3. Assumes that you are using Restful Authentication.
 
 Features
 ========
