@@ -1,4 +1,4 @@
-<div id="wall_post_<%=wall_post.id %>">
+<div id="wall_post_<%=wall_post.id %>" class="wall-post">
   <div><%= link_to wall_post.user.name, user_path(wall_post.user.id)%>: <%= h(wall_post.post)%></div>
   <% if wall_post.wall_post_links.present? %>
     <div><%= render :partial => "wall_posts/wall_post_link", :collection => wall_post.wall_post_links %></div>
@@ -10,8 +10,7 @@
     <div><%= render :partial => "wall_posts/video", :collection => wall_post.wall_post_videos %></div>
   <% end %>
   <div>
-    <p class="margin-right-5 left font_11 grey"><%= time_ago_in_words wall_post.created_at %></p>
+    <div class="margin-right-5 left font-11 gray"><%= time_ago_in_words wall_post.created_at %> ago</div>
     <div class="clear"></div>
   </div>
-  <hr/>
 </div>

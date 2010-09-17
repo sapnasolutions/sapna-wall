@@ -10,8 +10,36 @@
   clear: both;
 }
 
+.font-11{
+  font-size: 11px;
+}
+
+.gray{
+  color:gray;
+}
+
+#sapna_wall p{
+  margin: 2px 0 2px 0;
+}
+
+#sapna_wall .wall-post{
+  padding: 5px;
+  background-color: buttonface;
+  border-bottom: 1px solid darkGray;
+  width: 475px;
+  margin-bottom:10px;
+}
+
+#sapna_wall .wall-post{
+  font-size: 12px;
+}
+
 .margin-bottom-10{
   margin-bottom: 10px;
+}
+
+.margin-right-10{
+  margin-right: 10px;
 }
 
 .sapna-wall-form{
