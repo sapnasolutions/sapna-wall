@@ -18,6 +18,10 @@
   color:gray;
 }
 
+#sapna_wall .margin-5{
+  margin: 5px;
+}
+
 #sapna_wall p{
   margin: 2px 0 2px 0;
 }
