@@ -15,14 +15,16 @@ script/generate sapna_wall setup # something needs to be passed to the generator
 
 Install required plugins and gems
 
-rake sapna_wall:install_gems_and_plugins
+rake sapna_wall:setup
 
 Gems/plugins which get installed are:
-1. youtube_g
+1. youtube-g
 2. hpricot
-3. open-uri
-4. will_paginate
-5. attachment_fu script/plugin install http://svn.techno-weenie.net/projects/plugins/attachment_fu/
+3. will_paginate
+4. attachment_fu script/plugin install http://svn.techno-weenie.net/projects/plugins/attachment_fu/
+
+also, required JS, CSS and Images are copied to you applications's public folder.
+
 
 Usage
 =====
