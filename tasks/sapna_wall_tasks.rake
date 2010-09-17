@@ -5,6 +5,7 @@ namespace :sapna_wall do
     system "gem install youtube_g"
     system "gem install hpricot"
     system "gem install will_paginate --source http://gemcutter.org"
+    system "gem install mime-types"
     system "script/plugin install http://svn.techno-weenie.net/projects/plugins/attachment_fu/"
     system "rsync -rv vendor/plugins/sapna-wall/public ."
   end

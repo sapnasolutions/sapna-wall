@@ -22,6 +22,7 @@ Gems/plugins which get installed are:
 2. hpricot
 3. will_paginate
 4. attachment_fu script/plugin install http://svn.techno-weenie.net/projects/plugins/attachment_fu/
+5. mime-types
 
 also, required JS, CSS and Images are copied to you applications's public folder.
 
