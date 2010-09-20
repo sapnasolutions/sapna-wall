@@ -24,7 +24,9 @@ Gems/plugins which get installed are:
 4. attachment_fu script/plugin install http://svn.techno-weenie.net/projects/plugins/attachment_fu/
 5. mime-types
 
-also, required JS, CSS and Images are copied to you applications's public folder.
+also, required JS, CSS and Images are copied to you applications's public folder. You need to include them in your layout using the following helpers:
+<%= stylesheet_link_tag "sapna-wall" %>
+<%= include_sapna_wall_scripts %>
 
 
 Usage
@@ -37,9 +39,8 @@ here, "User" is the class name and "1" is the object id.
 Assumptions
 ===========
 
-1. This plugin requires acts_as_network, or assumes that your user model has_many friends and @user.friends returns an array of friends or blank. 
-2. Assumes that current_user method returns the logged-in user object or false
-3. Assumes that you are using Restful Authentication.
+1. Assumes that current_user method returns the logged-in user object or false just like in Restful Authentication
+2. Assumes that you are already using prototype JS library.
 
 Features
 ========
