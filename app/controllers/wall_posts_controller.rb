@@ -31,7 +31,7 @@ class WallPostsController < ActionController::Base
         page["wall_link_form"].hide
         @wall_post.post = "Posted a link." if @wall_post.post.blank?
       end
-      if params[:wall_post_video].present? && params[:wall_post_video][:url] != "http://"
+      if params[:wall_post_video].present?
         @wall_post.wall_post_videos.build(params[:wall_post_video]) 
         page.replace_html "VideoObject"," "
         page["video_form"].show
@@ -44,6 +44,10 @@ class WallPostsController < ActionController::Base
         @wall_post.post = "Posted images." if @wall_post.post.blank?
       end
       if @wall_post.save
+        page.visual_effect(:fade, "wall_photo_form")
+        page.replace_html("thumbnails", "") unless @wall_photos.blank?
+        page.replace_html("divFileProgressContainer", "") unless @wall_photos.blank?
+        page.visual_effect(:appear, "post_option_buttons")
         page.insert_html :top, "sapna_wall", :partial => "wall_posts/wall_post", :locals => {:wall_post => @wall_post}
       else
         page.alert(@wall_post.errors.full_messages.join("\n"))
